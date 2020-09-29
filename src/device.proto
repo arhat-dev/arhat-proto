@@ -37,8 +37,11 @@ enum DeviceCmdType {
 message DeviceCmd {
     DeviceCmdType kind = 1;
 
-    uint64 seq = 2;
-    bytes payload = 3;
+    // id assigned by the device manager in arhat agent
+    uint64 device_id = 2;
+
+    uint64 seq = 3;
+    bytes payload = 4;
 }
 
 message TLSConfig {
@@ -57,33 +60,22 @@ message TLSConfig {
 }
 
 message DeviceConnectCmd {
-    // id assigned by the device manager in arhat agent
-    uint32 id = 1;
-
-    string target = 2;
-    map<string, string> params = 3;
-    TLSConfig tls = 4;
+    string target = 1;
+    map<string, string> params = 2;
+    TLSConfig tls = 3;
 }
 
 message DeviceOperateCmd {
-    // id assigned by the device manager in arhat agent
-    uint32 id = 1;
-
-    map<string, string> params = 2;
+    map<string, string> params = 1;
     // (optional) operation data
-    bytes data = 3;
+    bytes data = 2;
 }
 
 message DeviceMetricsCollectCmd {
-    // id assigned by the device manager in arhat agent
-    uint32 id = 1;
-
-    map<string, string> params = 2;
+    map<string, string> params = 1;
 }
 
 message DeviceCloseCmd {
-    // id assigned by the device manager in arhat agent
-    uint32 id = 1;
 }
 
 enum DeviceMsgType {
@@ -101,9 +93,11 @@ enum DeviceMsgType {
 message DeviceMsg {
     DeviceMsgType kind = 1;
 
+    uint64 device_id = 2;
+
     // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
-    uint64 ack = 2;
-    bytes payload = 3;
+    uint64 ack = 3;
+    bytes payload = 4;
 }
 
 message DeviceDoneMsg {

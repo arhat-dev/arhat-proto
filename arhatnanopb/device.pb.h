@@ -37,6 +37,10 @@ typedef enum _arhat_DeviceEventType {
 } arhat_DeviceEventType;
 
 /* Struct definitions */
+typedef struct _arhat_DeviceCloseCmd {
+    char dummy_field;
+} arhat_DeviceCloseCmd;
+
 typedef struct _arhat_DeviceConnectCmd_ParamsEntry {
     pb_callback_t key;
     pb_callback_t value;
@@ -46,6 +50,10 @@ typedef struct _arhat_DeviceDoneMsg {
     char dummy_field;
 } arhat_DeviceDoneMsg;
 
+typedef struct _arhat_DeviceMetricsCollectCmd {
+    pb_callback_t params;
+} arhat_DeviceMetricsCollectCmd;
+
 typedef struct _arhat_DeviceMetricsCollectCmd_ParamsEntry {
     pb_callback_t key;
     pb_callback_t value;
@@ -54,6 +62,11 @@ typedef struct _arhat_DeviceMetricsCollectCmd_ParamsEntry {
 typedef struct _arhat_DeviceMetricsMsg {
     pb_callback_t values;
 } arhat_DeviceMetricsMsg;
+
+typedef struct _arhat_DeviceOperateCmd {
+    pb_callback_t params;
+    pb_callback_t data;
+} arhat_DeviceOperateCmd;
 
 typedef struct _arhat_DeviceOperateCmd_ParamsEntry {
     pb_callback_t key;
@@ -72,12 +85,9 @@ typedef struct _arhat_ErrorMsg {
     pb_callback_t description;
 } arhat_ErrorMsg;
 
-typedef struct _arhat_DeviceCloseCmd {
-    uint32_t id;
-} arhat_DeviceCloseCmd;
-
 typedef struct _arhat_DeviceCmd {
     arhat_DeviceCmdType kind;
+    uint64_t device_id;
     uint64_t seq;
     pb_callback_t payload;
 } arhat_DeviceCmd;
@@ -86,11 +96,6 @@ typedef struct _arhat_DeviceEventMsg {
     arhat_DeviceEventType kind;
 } arhat_DeviceEventMsg;
 
-typedef struct _arhat_DeviceMetricsCollectCmd {
-    uint32_t id;
-    pb_callback_t params;
-} arhat_DeviceMetricsCollectCmd;
-
 typedef struct _arhat_DeviceMetricsMsg_Value {
     double value;
     int64_t timestamp;
@@ -98,15 +103,10 @@ typedef struct _arhat_DeviceMetricsMsg_Value {
 
 typedef struct _arhat_DeviceMsg {
     arhat_DeviceMsgType kind;
+    uint64_t device_id;
     uint64_t ack;
     pb_callback_t payload;
 } arhat_DeviceMsg;
-
-typedef struct _arhat_DeviceOperateCmd {
-    uint32_t id;
-    pb_callback_t params;
-    pb_callback_t data;
-} arhat_DeviceOperateCmd;
 
 typedef struct _arhat_TLSConfig {
     pb_callback_t server_name;
@@ -121,7 +121,6 @@ typedef struct _arhat_TLSConfig {
 } arhat_TLSConfig;
 
 typedef struct _arhat_DeviceConnectCmd {
-    uint32_t id;
     pb_callback_t target;
     pb_callback_t params;
     bool has_tls;
@@ -144,16 +143,16 @@ typedef struct _arhat_DeviceConnectCmd {
 
 
 /* Initializer values for message structs */
-#define arhat_DeviceCmd_init_default             {_arhat_DeviceCmdType_MIN, 0, {{NULL}, NULL}}
+#define arhat_DeviceCmd_init_default             {_arhat_DeviceCmdType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_TLSConfig_init_default             {{{NULL}, NULL}, 0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceConnectCmd_init_default      {0, {{NULL}, NULL}, {{NULL}, NULL}, false, arhat_TLSConfig_init_default}
+#define arhat_DeviceConnectCmd_init_default      {{{NULL}, NULL}, {{NULL}, NULL}, false, arhat_TLSConfig_init_default}
 #define arhat_DeviceConnectCmd_ParamsEntry_init_default {{{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceOperateCmd_init_default      {0, {{NULL}, NULL}, {{NULL}, NULL}}
+#define arhat_DeviceOperateCmd_init_default      {{{NULL}, NULL}, {{NULL}, NULL}}
 #define arhat_DeviceOperateCmd_ParamsEntry_init_default {{{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceMetricsCollectCmd_init_default {0, {{NULL}, NULL}}
+#define arhat_DeviceMetricsCollectCmd_init_default {{{NULL}, NULL}}
 #define arhat_DeviceMetricsCollectCmd_ParamsEntry_init_default {{{NULL}, NULL}, {{NULL}, NULL}}
 #define arhat_DeviceCloseCmd_init_default        {0}
-#define arhat_DeviceMsg_init_default             {_arhat_DeviceMsgType_MIN, 0, {{NULL}, NULL}}
+#define arhat_DeviceMsg_init_default             {_arhat_DeviceMsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DeviceDoneMsg_init_default         {0}
 #define arhat_DeviceRegisterMsg_init_default     {{{NULL}, NULL}}
 #define arhat_DeviceOperateResultMsg_init_default {{{NULL}, NULL}}
@@ -161,16 +160,16 @@ typedef struct _arhat_DeviceConnectCmd {
 #define arhat_DeviceMetricsMsg_Value_init_default {0, 0}
 #define arhat_DeviceEventMsg_init_default        {_arhat_DeviceEventType_MIN}
 #define arhat_ErrorMsg_init_default              {{{NULL}, NULL}}
-#define arhat_DeviceCmd_init_zero                {_arhat_DeviceCmdType_MIN, 0, {{NULL}, NULL}}
+#define arhat_DeviceCmd_init_zero                {_arhat_DeviceCmdType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_TLSConfig_init_zero                {{{NULL}, NULL}, 0, 0, 0, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceConnectCmd_init_zero         {0, {{NULL}, NULL}, {{NULL}, NULL}, false, arhat_TLSConfig_init_zero}
+#define arhat_DeviceConnectCmd_init_zero         {{{NULL}, NULL}, {{NULL}, NULL}, false, arhat_TLSConfig_init_zero}
 #define arhat_DeviceConnectCmd_ParamsEntry_init_zero {{{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceOperateCmd_init_zero         {0, {{NULL}, NULL}, {{NULL}, NULL}}
+#define arhat_DeviceOperateCmd_init_zero         {{{NULL}, NULL}, {{NULL}, NULL}}
 #define arhat_DeviceOperateCmd_ParamsEntry_init_zero {{{NULL}, NULL}, {{NULL}, NULL}}
-#define arhat_DeviceMetricsCollectCmd_init_zero  {0, {{NULL}, NULL}}
+#define arhat_DeviceMetricsCollectCmd_init_zero  {{{NULL}, NULL}}
 #define arhat_DeviceMetricsCollectCmd_ParamsEntry_init_zero {{{NULL}, NULL}, {{NULL}, NULL}}
 #define arhat_DeviceCloseCmd_init_zero           {0}
-#define arhat_DeviceMsg_init_zero                {_arhat_DeviceMsgType_MIN, 0, {{NULL}, NULL}}
+#define arhat_DeviceMsg_init_zero                {_arhat_DeviceMsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DeviceDoneMsg_init_zero            {0}
 #define arhat_DeviceRegisterMsg_init_zero        {{{NULL}, NULL}}
 #define arhat_DeviceOperateResultMsg_init_zero   {{{NULL}, NULL}}
@@ -182,29 +181,28 @@ typedef struct _arhat_DeviceConnectCmd {
 /* Field tags (for use in manual encoding/decoding) */
 #define arhat_DeviceConnectCmd_ParamsEntry_key_tag 1
 #define arhat_DeviceConnectCmd_ParamsEntry_value_tag 2
+#define arhat_DeviceMetricsCollectCmd_params_tag 1
 #define arhat_DeviceMetricsCollectCmd_ParamsEntry_key_tag 1
 #define arhat_DeviceMetricsCollectCmd_ParamsEntry_value_tag 2
 #define arhat_DeviceMetricsMsg_values_tag        1
+#define arhat_DeviceOperateCmd_params_tag        1
+#define arhat_DeviceOperateCmd_data_tag          2
 #define arhat_DeviceOperateCmd_ParamsEntry_key_tag 1
 #define arhat_DeviceOperateCmd_ParamsEntry_value_tag 2
 #define arhat_DeviceOperateResultMsg_result_tag  1
 #define arhat_DeviceRegisterMsg_name_tag         1
 #define arhat_ErrorMsg_description_tag           1
-#define arhat_DeviceCloseCmd_id_tag              1
 #define arhat_DeviceCmd_kind_tag                 1
-#define arhat_DeviceCmd_seq_tag                  2
-#define arhat_DeviceCmd_payload_tag              3
+#define arhat_DeviceCmd_device_id_tag            2
+#define arhat_DeviceCmd_seq_tag                  3
+#define arhat_DeviceCmd_payload_tag              4
 #define arhat_DeviceEventMsg_kind_tag            1
-#define arhat_DeviceMetricsCollectCmd_id_tag     1
-#define arhat_DeviceMetricsCollectCmd_params_tag 2
 #define arhat_DeviceMetricsMsg_Value_value_tag   1
 #define arhat_DeviceMetricsMsg_Value_timestamp_tag 2
 #define arhat_DeviceMsg_kind_tag                 1
-#define arhat_DeviceMsg_ack_tag                  2
-#define arhat_DeviceMsg_payload_tag              3
-#define arhat_DeviceOperateCmd_id_tag            1
-#define arhat_DeviceOperateCmd_params_tag        2
-#define arhat_DeviceOperateCmd_data_tag          3
+#define arhat_DeviceMsg_device_id_tag            2
+#define arhat_DeviceMsg_ack_tag                  3
+#define arhat_DeviceMsg_payload_tag              4
 #define arhat_TLSConfig_server_name_tag          1
 #define arhat_TLSConfig_insecure_skip_verify_tag 2
 #define arhat_TLSConfig_min_version_tag          3
@@ -214,16 +212,16 @@ typedef struct _arhat_DeviceConnectCmd {
 #define arhat_TLSConfig_key_tag                  7
 #define arhat_TLSConfig_cipher_suites_tag        8
 #define arhat_TLSConfig_next_protos_tag          9
-#define arhat_DeviceConnectCmd_id_tag            1
-#define arhat_DeviceConnectCmd_target_tag        2
-#define arhat_DeviceConnectCmd_params_tag        3
-#define arhat_DeviceConnectCmd_tls_tag           4
+#define arhat_DeviceConnectCmd_target_tag        1
+#define arhat_DeviceConnectCmd_params_tag        2
+#define arhat_DeviceConnectCmd_tls_tag           3
 
 /* Struct field encoding specification for nanopb */
 #define arhat_DeviceCmd_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    kind,              1) \
-X(a, STATIC,   SINGULAR, UINT64,   seq,               2) \
-X(a, CALLBACK, SINGULAR, BYTES,    payload,           3)
+X(a, STATIC,   SINGULAR, UINT64,   device_id,         2) \
+X(a, STATIC,   SINGULAR, UINT64,   seq,               3) \
+X(a, CALLBACK, SINGULAR, BYTES,    payload,           4)
 #define arhat_DeviceCmd_CALLBACK pb_default_field_callback
 #define arhat_DeviceCmd_DEFAULT NULL
 
@@ -241,10 +239,9 @@ X(a, CALLBACK, REPEATED, STRING,   next_protos,       9)
 #define arhat_TLSConfig_DEFAULT NULL
 
 #define arhat_DeviceConnectCmd_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
-X(a, CALLBACK, SINGULAR, STRING,   target,            2) \
-X(a, CALLBACK, REPEATED, MESSAGE,  params,            3) \
-X(a, STATIC,   OPTIONAL, MESSAGE,  tls,               4)
+X(a, CALLBACK, SINGULAR, STRING,   target,            1) \
+X(a, CALLBACK, REPEATED, MESSAGE,  params,            2) \
+X(a, STATIC,   OPTIONAL, MESSAGE,  tls,               3)
 #define arhat_DeviceConnectCmd_CALLBACK pb_default_field_callback
 #define arhat_DeviceConnectCmd_DEFAULT NULL
 #define arhat_DeviceConnectCmd_params_MSGTYPE arhat_DeviceConnectCmd_ParamsEntry
@@ -257,9 +254,8 @@ X(a, CALLBACK, SINGULAR, STRING,   value,             2)
 #define arhat_DeviceConnectCmd_ParamsEntry_DEFAULT NULL
 
 #define arhat_DeviceOperateCmd_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
-X(a, CALLBACK, REPEATED, MESSAGE,  params,            2) \
-X(a, CALLBACK, SINGULAR, BYTES,    data,              3)
+X(a, CALLBACK, REPEATED, MESSAGE,  params,            1) \
+X(a, CALLBACK, SINGULAR, BYTES,    data,              2)
 #define arhat_DeviceOperateCmd_CALLBACK pb_default_field_callback
 #define arhat_DeviceOperateCmd_DEFAULT NULL
 #define arhat_DeviceOperateCmd_params_MSGTYPE arhat_DeviceOperateCmd_ParamsEntry
@@ -271,8 +267,7 @@ X(a, CALLBACK, SINGULAR, STRING,   value,             2)
 #define arhat_DeviceOperateCmd_ParamsEntry_DEFAULT NULL
 
 #define arhat_DeviceMetricsCollectCmd_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1) \
-X(a, CALLBACK, REPEATED, MESSAGE,  params,            2)
+X(a, CALLBACK, REPEATED, MESSAGE,  params,            1)
 #define arhat_DeviceMetricsCollectCmd_CALLBACK pb_default_field_callback
 #define arhat_DeviceMetricsCollectCmd_DEFAULT NULL
 #define arhat_DeviceMetricsCollectCmd_params_MSGTYPE arhat_DeviceMetricsCollectCmd_ParamsEntry
@@ -284,14 +279,15 @@ X(a, CALLBACK, SINGULAR, STRING,   value,             2)
 #define arhat_DeviceMetricsCollectCmd_ParamsEntry_DEFAULT NULL
 
 #define arhat_DeviceCloseCmd_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   id,                1)
+
 #define arhat_DeviceCloseCmd_CALLBACK NULL
 #define arhat_DeviceCloseCmd_DEFAULT NULL
 
 #define arhat_DeviceMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    kind,              1) \
-X(a, STATIC,   SINGULAR, UINT64,   ack,               2) \
-X(a, CALLBACK, SINGULAR, BYTES,    payload,           3)
+X(a, STATIC,   SINGULAR, UINT64,   device_id,         2) \
+X(a, STATIC,   SINGULAR, UINT64,   ack,               3) \
+X(a, CALLBACK, SINGULAR, BYTES,    payload,           4)
 #define arhat_DeviceMsg_CALLBACK pb_default_field_callback
 #define arhat_DeviceMsg_DEFAULT NULL
 
@@ -378,7 +374,7 @@ extern const pb_msgdesc_t arhat_ErrorMsg_msg;
 /* arhat_DeviceOperateCmd_ParamsEntry_size depends on runtime parameters */
 /* arhat_DeviceMetricsCollectCmd_size depends on runtime parameters */
 /* arhat_DeviceMetricsCollectCmd_ParamsEntry_size depends on runtime parameters */
-#define arhat_DeviceCloseCmd_size                6
+#define arhat_DeviceCloseCmd_size                0
 /* arhat_DeviceMsg_size depends on runtime parameters */
 #define arhat_DeviceDoneMsg_size                 0
 /* arhat_DeviceRegisterMsg_size depends on runtime parameters */

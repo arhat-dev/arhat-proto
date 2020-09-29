@@ -11,7 +11,7 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-func NewDeviceCmd(seq uint64, cmd proto.Marshaler) (*DeviceCmd, error) {
+func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*DeviceCmd, error) {
 	var kind DeviceCmdType
 	switch cmd.(type) {
 	case *DeviceConnectCmd:
@@ -32,13 +32,14 @@ func NewDeviceCmd(seq uint64, cmd proto.Marshaler) (*DeviceCmd, error) {
 	}
 
 	return &DeviceCmd{
-		Kind:    kind,
-		Seq:     seq,
-		Payload: data,
+		Kind:     kind,
+		DeviceId: deviceID,
+		Seq:      seq,
+		Payload:  data,
 	}, nil
 }
 
-func NewDeviceMsg(ack uint64, msg proto.Marshaler) (*DeviceMsg, error) {
+func NewDeviceMsg(deviceID, ack uint64, msg proto.Marshaler) (*DeviceMsg, error) {
 	var kind DeviceMsgType
 	switch msg.(type) {
 	case *DeviceRegisterMsg:
@@ -59,9 +60,10 @@ func NewDeviceMsg(ack uint64, msg proto.Marshaler) (*DeviceMsg, error) {
 	}
 
 	return &DeviceMsg{
-		Kind:    kind,
-		Ack:     ack,
-		Payload: data,
+		Kind:     kind,
+		DeviceId: deviceID,
+		Ack:      ack,
+		Payload:  data,
 	}, nil
 }
 
