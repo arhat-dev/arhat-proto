@@ -34,27 +34,27 @@ fix_pb_gen_json_name() {
 }
 
 _do_gen_proto_go() {
-  rm templategopb/*.pb.go || true
+  rm arhatgopb/*.pb.go || true
   # shellcheck disable=SC2086
   protoc \
     -I"${GOPATH}/src" \
     -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
     -I"./src" \
-    --gogoslick_out "plugins=grpc:./templategopb" \
+    --gogoslick_out "plugins=grpc:./arhatgopb" \
     --gogoslick_opt "paths=source_relative" \
     ${PROTO_SOURCE}
 
-  # fix_pb_gen_json_name ./templategopb/*.pb.go
+  # fix_pb_gen_json_name ./arhatgopb/*.pb.go
 }
 
 _do_gen_proto_c() {
-  rm templatenanopb/*.pb.c templatenanopb/*.pb.h || true
+  rm arhatnanopb/*.pb.c arhatnanopb/*.pb.h || true
   # shellcheck disable=SC2086
   pipenv run \
   python build/nanopb/generator/nanopb_generator.py \
     --no-timestamp \
     -x github.com/gogo/protobuf/gogoproto/gogo.proto \
-    --output-dir ./templatenanopb \
+    --output-dir ./arhatnanopb \
     -I"${GOPATH}/src" \
     -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
     -I"./src" \

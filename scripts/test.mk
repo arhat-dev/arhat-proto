@@ -15,7 +15,7 @@
 test.go:
 	GOOS=$(shell go env GOHOSTOS) GOARCH=$(shell go env GOHOSTARCH) CGO_ENABLED=1 \
 	go test -mod=readonly -v -failfast -covermode=atomic -race -cpu 1,2,4 \
-	-coverprofile=coverage.pkg.txt -coverpkg=./templategopb/... ./templategopb/...
+	-coverprofile=coverage.pkg.txt -coverpkg=./arhatgopb/... ./arhatgopb/...
 
 test.c:
 	# TODO: add tests for c protobuf files

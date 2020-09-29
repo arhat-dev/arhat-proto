@@ -1,0 +1,141 @@
+/*
+Copyright 2020 The arhat.dev Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+syntax = "proto3";
+
+// +build !nodev
+package arhat;
+
+option go_package = "arhat.dev/arhat-proto/arhatgopb";
+
+service DeviceExtension {
+    rpc Sync(stream DeviceMsg) returns (stream DeviceCmd);
+}
+
+enum DeviceCmdType {
+    _INVALID_DEV_CMD = 0;
+
+    CMD_DEV_CONNECT = 1;
+    CMD_DEV_OPERATE = 2;
+    CMD_DEV_COLLECT_METRICS = 3;
+    CMD_DEV_CLOSE = 4;
+}
+
+message DeviceCmd {
+    DeviceCmdType kind = 1;
+
+    uint64 seq = 2;
+    bytes payload = 3;
+}
+
+message TLSConfig {
+    string server_name = 1;
+    bool insecure_skip_verify = 2;
+
+    uint32 min_version = 3;
+    uint32 max_version = 4;
+
+    bytes ca_cert = 5;
+    bytes cert = 6;
+    bytes key = 7;
+
+    repeated uint32 cipher_suites = 8;
+    repeated string next_protos = 9;
+}
+
+message DeviceConnectCmd {
+    // id assigned by the device manager in arhat agent
+    uint32 id = 1;
+
+    string target = 2;
+    map<string, string> params = 3;
+    TLSConfig tls = 4;
+}
+
+message DeviceOperateCmd {
+    // id assigned by the device manager in arhat agent
+    uint32 id = 1;
+
+    map<string, string> params = 2;
+    // (optional) operation data
+    bytes data = 3;
+}
+
+message DeviceMetricsCollectCmd {
+    // id assigned by the device manager in arhat agent
+    uint32 id = 1;
+
+    map<string, string> params = 2;
+}
+
+message DeviceCloseCmd {
+    // id assigned by the device manager in arhat agent
+    uint32 id = 1;
+}
+
+enum DeviceMsgType {
+    _INVALID_DEV_MSG = 0;
+
+    MSG_DEV_ERROR = 1;
+    MSG_DEV_DONE = 2;
+
+    MSG_DEV_REGISTER = 3;
+    MSG_DEV_OPERATION_RESULT = 4;
+    MSG_DEV_METRICS = 5;
+    MSG_DEV_EVENTS = 6;
+}
+
+message DeviceMsg {
+    DeviceMsgType kind = 1;
+
+    // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
+    uint64 ack = 2;
+    bytes payload = 3;
+}
+
+message DeviceDoneMsg {
+}
+
+message DeviceRegisterMsg {
+    string name = 1;
+}
+
+message DeviceOperateResultMsg {
+    repeated bytes result = 1;
+}
+
+message DeviceMetricsMsg {
+    message Value {
+        double value = 1;
+
+        // unix timestamp
+        int64 timestamp = 2;
+    }
+
+    repeated Value values = 1;
+}
+
+enum DeviceEventType {
+    _INVALID_DEV_EVENT = 0;
+}
+
+message DeviceEventMsg {
+    DeviceEventType kind = 1;
+}
+
+message ErrorMsg {
+    string description = 1;
+}
