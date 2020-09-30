@@ -21,11 +21,13 @@ package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
 
+service Extension {
+    rpc SyncDevice (stream Msg) returns (stream Cmd);
+}
+
 enum CmdType {
     _INVALID_CMD = 0;
 
-    CMD_SESSION_SET = 1;
-    
     CMD_DEV_CONNECT = 11;
     CMD_DEV_OPERATE = 12;
     CMD_DEV_COLLECT_METRICS = 13;
@@ -35,15 +37,11 @@ enum CmdType {
 message Cmd {
     CmdType kind = 1;
 
-    // id assigned by the device manager in arhat agent
-    uint64 device_id = 2;
+    // id assigned by the arhat extension manager
+    uint64 id = 2;
 
     uint64 seq = 3;
     bytes payload = 4;
-}
-
-message SessionSetCmd {
-    string session_id = 1;
 }
 
 enum MsgType {
@@ -59,18 +57,14 @@ enum MsgType {
 }
 
 message Msg {
-    // session id is a random string assigned by arhat agent 
-    // after the initial successful registration
-    string session_id = 1;
+    MsgType kind = 1;
 
-    MsgType kind = 2;
-
-    // id assigned by the device manager in arhat agent
-    uint64 device_id = 3;
+    // id assigned by the arhat extension manager
+    uint64 id = 2;
 
     // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
-    uint64 ack = 4;
-    bytes payload = 5;
+    uint64 ack = 3;
+    bytes payload = 4;
 }
 
 message DoneMsg {
