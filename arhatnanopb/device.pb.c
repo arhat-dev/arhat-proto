@@ -6,9 +6,6 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(arhat_DeviceCmd, arhat_DeviceCmd, AUTO)
-
-
 PB_BIND(arhat_TLSConfig, arhat_TLSConfig, AUTO)
 
 
@@ -33,12 +30,6 @@ PB_BIND(arhat_DeviceMetricsCollectCmd_ParamsEntry, arhat_DeviceMetricsCollectCmd
 PB_BIND(arhat_DeviceCloseCmd, arhat_DeviceCloseCmd, AUTO)
 
 
-PB_BIND(arhat_DeviceMsg, arhat_DeviceMsg, AUTO)
-
-
-PB_BIND(arhat_DeviceDoneMsg, arhat_DeviceDoneMsg, AUTO)
-
-
 PB_BIND(arhat_DeviceRegisterMsg, arhat_DeviceRegisterMsg, AUTO)
 
 
@@ -52,11 +43,6 @@ PB_BIND(arhat_DeviceMetricsMsg_Value, arhat_DeviceMetricsMsg_Value, AUTO)
 
 
 PB_BIND(arhat_DeviceEventMsg, arhat_DeviceEventMsg, AUTO)
-
-
-PB_BIND(arhat_ErrorMsg, arhat_ErrorMsg, AUTO)
-
-
 
 
 

@@ -21,25 +21,6 @@ package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
 
-enum DeviceCmdType {
-    _INVALID_DEV_CMD = 0;
-
-    CMD_DEV_CONNECT = 1;
-    CMD_DEV_OPERATE = 2;
-    CMD_DEV_COLLECT_METRICS = 3;
-    CMD_DEV_CLOSE = 4;
-}
-
-message DeviceCmd {
-    DeviceCmdType kind = 1;
-
-    // id assigned by the device manager in arhat agent
-    uint64 device_id = 2;
-
-    uint64 seq = 3;
-    bytes payload = 4;
-}
-
 message TLSConfig {
     string server_name = 1;
     bool insecure_skip_verify = 2;
@@ -74,30 +55,11 @@ message DeviceMetricsCollectCmd {
 message DeviceCloseCmd {
 }
 
-enum DeviceMsgType {
-    _INVALID_DEV_MSG = 0;
+/*
 
-    MSG_DEV_ERROR = 1;
-    MSG_DEV_DONE = 2;
 
-    MSG_DEV_REGISTER = 3;
-    MSG_DEV_OPERATION_RESULT = 4;
-    MSG_DEV_METRICS = 5;
-    MSG_DEV_EVENTS = 6;
-}
 
-message DeviceMsg {
-    DeviceMsgType kind = 1;
-
-    uint64 device_id = 2;
-
-    // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
-    uint64 ack = 3;
-    bytes payload = 4;
-}
-
-message DeviceDoneMsg {
-}
+*/
 
 message DeviceRegisterMsg {
     string name = 1;
@@ -124,8 +86,4 @@ enum DeviceEventType {
 
 message DeviceEventMsg {
     DeviceEventType kind = 1;
-}
-
-message ErrorMsg {
-    string description = 1;
 }
