@@ -40,7 +40,7 @@ _do_gen_proto_go() {
     -I"${GOPATH}/src" \
     -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
     -I"./src" \
-    --gogoslick_out "plugins=grpc:./arhatgopb" \
+    --gogoslick_out "./arhatgopb" \
     --gogoslick_opt "paths=source_relative" \
     ${PROTO_SOURCE}
 

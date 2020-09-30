@@ -73,9 +73,9 @@ typedef struct _arhat_DeviceOperateCmd_ParamsEntry {
     pb_callback_t value;
 } arhat_DeviceOperateCmd_ParamsEntry;
 
-typedef struct _arhat_DeviceOperateResultMsg {
+typedef struct _arhat_DeviceOperationResultMsg {
     pb_callback_t result;
-} arhat_DeviceOperateResultMsg;
+} arhat_DeviceOperationResultMsg;
 
 typedef struct _arhat_DeviceRegisterMsg {
     pb_callback_t name;
@@ -155,7 +155,7 @@ typedef struct _arhat_DeviceConnectCmd {
 #define arhat_DeviceMsg_init_default             {_arhat_DeviceMsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DeviceDoneMsg_init_default         {0}
 #define arhat_DeviceRegisterMsg_init_default     {{{NULL}, NULL}}
-#define arhat_DeviceOperateResultMsg_init_default {{{NULL}, NULL}}
+#define arhat_DeviceOperationResultMsg_init_default {{{NULL}, NULL}}
 #define arhat_DeviceMetricsMsg_init_default      {{{NULL}, NULL}}
 #define arhat_DeviceMetricsMsg_Value_init_default {0, 0}
 #define arhat_DeviceEventMsg_init_default        {_arhat_DeviceEventType_MIN}
@@ -172,7 +172,7 @@ typedef struct _arhat_DeviceConnectCmd {
 #define arhat_DeviceMsg_init_zero                {_arhat_DeviceMsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DeviceDoneMsg_init_zero            {0}
 #define arhat_DeviceRegisterMsg_init_zero        {{{NULL}, NULL}}
-#define arhat_DeviceOperateResultMsg_init_zero   {{{NULL}, NULL}}
+#define arhat_DeviceOperationResultMsg_init_zero {{{NULL}, NULL}}
 #define arhat_DeviceMetricsMsg_init_zero         {{{NULL}, NULL}}
 #define arhat_DeviceMetricsMsg_Value_init_zero   {0, 0}
 #define arhat_DeviceEventMsg_init_zero           {_arhat_DeviceEventType_MIN}
@@ -189,7 +189,7 @@ typedef struct _arhat_DeviceConnectCmd {
 #define arhat_DeviceOperateCmd_data_tag          2
 #define arhat_DeviceOperateCmd_ParamsEntry_key_tag 1
 #define arhat_DeviceOperateCmd_ParamsEntry_value_tag 2
-#define arhat_DeviceOperateResultMsg_result_tag  1
+#define arhat_DeviceOperationResultMsg_result_tag 1
 #define arhat_DeviceRegisterMsg_name_tag         1
 #define arhat_ErrorMsg_description_tag           1
 #define arhat_DeviceCmd_kind_tag                 1
@@ -301,10 +301,10 @@ X(a, CALLBACK, SINGULAR, STRING,   name,              1)
 #define arhat_DeviceRegisterMsg_CALLBACK pb_default_field_callback
 #define arhat_DeviceRegisterMsg_DEFAULT NULL
 
-#define arhat_DeviceOperateResultMsg_FIELDLIST(X, a) \
+#define arhat_DeviceOperationResultMsg_FIELDLIST(X, a) \
 X(a, CALLBACK, REPEATED, BYTES,    result,            1)
-#define arhat_DeviceOperateResultMsg_CALLBACK pb_default_field_callback
-#define arhat_DeviceOperateResultMsg_DEFAULT NULL
+#define arhat_DeviceOperationResultMsg_CALLBACK pb_default_field_callback
+#define arhat_DeviceOperationResultMsg_DEFAULT NULL
 
 #define arhat_DeviceMetricsMsg_FIELDLIST(X, a) \
 X(a, CALLBACK, REPEATED, MESSAGE,  values,            1)
@@ -340,7 +340,7 @@ extern const pb_msgdesc_t arhat_DeviceCloseCmd_msg;
 extern const pb_msgdesc_t arhat_DeviceMsg_msg;
 extern const pb_msgdesc_t arhat_DeviceDoneMsg_msg;
 extern const pb_msgdesc_t arhat_DeviceRegisterMsg_msg;
-extern const pb_msgdesc_t arhat_DeviceOperateResultMsg_msg;
+extern const pb_msgdesc_t arhat_DeviceOperationResultMsg_msg;
 extern const pb_msgdesc_t arhat_DeviceMetricsMsg_msg;
 extern const pb_msgdesc_t arhat_DeviceMetricsMsg_Value_msg;
 extern const pb_msgdesc_t arhat_DeviceEventMsg_msg;
@@ -359,7 +359,7 @@ extern const pb_msgdesc_t arhat_ErrorMsg_msg;
 #define arhat_DeviceMsg_fields &arhat_DeviceMsg_msg
 #define arhat_DeviceDoneMsg_fields &arhat_DeviceDoneMsg_msg
 #define arhat_DeviceRegisterMsg_fields &arhat_DeviceRegisterMsg_msg
-#define arhat_DeviceOperateResultMsg_fields &arhat_DeviceOperateResultMsg_msg
+#define arhat_DeviceOperationResultMsg_fields &arhat_DeviceOperationResultMsg_msg
 #define arhat_DeviceMetricsMsg_fields &arhat_DeviceMetricsMsg_msg
 #define arhat_DeviceMetricsMsg_Value_fields &arhat_DeviceMetricsMsg_Value_msg
 #define arhat_DeviceEventMsg_fields &arhat_DeviceEventMsg_msg
@@ -378,7 +378,7 @@ extern const pb_msgdesc_t arhat_ErrorMsg_msg;
 /* arhat_DeviceMsg_size depends on runtime parameters */
 #define arhat_DeviceDoneMsg_size                 0
 /* arhat_DeviceRegisterMsg_size depends on runtime parameters */
-/* arhat_DeviceOperateResultMsg_size depends on runtime parameters */
+/* arhat_DeviceOperationResultMsg_size depends on runtime parameters */
 /* arhat_DeviceMetricsMsg_size depends on runtime parameters */
 #define arhat_DeviceMetricsMsg_Value_size        20
 #define arhat_DeviceEventMsg_size                2

@@ -42,7 +42,7 @@ PB_BIND(arhat_DeviceDoneMsg, arhat_DeviceDoneMsg, AUTO)
 PB_BIND(arhat_DeviceRegisterMsg, arhat_DeviceRegisterMsg, AUTO)
 
 
-PB_BIND(arhat_DeviceOperateResultMsg, arhat_DeviceOperateResultMsg, AUTO)
+PB_BIND(arhat_DeviceOperationResultMsg, arhat_DeviceOperationResultMsg, AUTO)
 
 
 PB_BIND(arhat_DeviceMetricsMsg, arhat_DeviceMetricsMsg, AUTO)

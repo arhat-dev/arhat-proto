@@ -103,7 +103,7 @@ message DeviceRegisterMsg {
     string name = 1;
 }
 
-message DeviceOperateResultMsg {
+message DeviceOperationResultMsg {
     repeated bytes result = 1;
 }
 

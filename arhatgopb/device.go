@@ -44,7 +44,7 @@ func NewDeviceMsg(deviceID, ack uint64, msg proto.Marshaler) (*DeviceMsg, error)
 	switch msg.(type) {
 	case *DeviceRegisterMsg:
 		kind = MSG_DEV_REGISTER
-	case *DeviceOperateResultMsg:
+	case *DeviceOperationResultMsg:
 		kind = MSG_DEV_OPERATION_RESULT
 	case *DeviceMetricsMsg:
 		kind = MSG_DEV_METRICS
