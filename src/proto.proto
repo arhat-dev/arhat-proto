@@ -24,10 +24,12 @@ option go_package = "arhat.dev/arhat-proto/arhatgopb";
 enum CmdType {
     _INVALID_CMD = 0;
 
-    CMD_DEV_CONNECT = 1;
-    CMD_DEV_OPERATE = 2;
-    CMD_DEV_COLLECT_METRICS = 3;
-    CMD_DEV_CLOSE = 4;
+    CMD_SESSION_SET = 1;
+    
+    CMD_DEV_CONNECT = 11;
+    CMD_DEV_OPERATE = 12;
+    CMD_DEV_COLLECT_METRICS = 13;
+    CMD_DEV_CLOSE = 14;
 }
 
 message Cmd {
@@ -40,6 +42,10 @@ message Cmd {
     bytes payload = 4;
 }
 
+message SessionSetCmd {
+    string session_id = 1;
+}
+
 enum MsgType {
     _INVALID_MSG = 0;
 
@@ -47,9 +53,9 @@ enum MsgType {
     MSG_DONE = 2;
     MSG_REGISTER = 3;
 
-    MSG_DEV_OPERATION_RESULT = 4;
-    MSG_DEV_METRICS = 5;
-    MSG_DEV_EVENTS = 6;
+    MSG_DEV_OPERATION_RESULT = 11;
+    MSG_DEV_METRICS = 12;
+    MSG_DEV_EVENTS = 13;
 }
 
 message Msg {
@@ -75,4 +81,5 @@ message ErrorMsg {
 }
 
 message RegisterMsg {
+    string name = 1;
 }

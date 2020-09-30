@@ -9,6 +9,9 @@
 PB_BIND(arhat_Cmd, arhat_Cmd, AUTO)
 
 
+PB_BIND(arhat_SessionSetCmd, arhat_SessionSetCmd, AUTO)
+
+
 PB_BIND(arhat_Msg, arhat_Msg, AUTO)
 
 

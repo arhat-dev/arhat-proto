@@ -30,9 +30,6 @@ PB_BIND(arhat_DeviceMetricsCollectCmd_ParamsEntry, arhat_DeviceMetricsCollectCmd
 PB_BIND(arhat_DeviceCloseCmd, arhat_DeviceCloseCmd, AUTO)
 
 
-PB_BIND(arhat_DeviceRegisterMsg, arhat_DeviceRegisterMsg, AUTO)
-
-
 PB_BIND(arhat_DeviceOperationResultMsg, arhat_DeviceOperationResultMsg, AUTO)
 
 

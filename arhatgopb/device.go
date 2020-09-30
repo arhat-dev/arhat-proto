@@ -11,9 +11,11 @@ import (
 	"github.com/gogo/protobuf/proto"
 )
 
-func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*DeviceCmd, error) {
-	var kind DeviceCmdType
+func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*Cmd, error) {
+	var kind CmdType
 	switch cmd.(type) {
+	case *SessionSetCmd:
+		kind = CMD_SESSION_SET
 	case *DeviceConnectCmd:
 		kind = CMD_DEV_CONNECT
 	case *DeviceOperateCmd:
@@ -23,7 +25,7 @@ func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*DeviceCmd, error)
 	case *DeviceCloseCmd:
 		kind = CMD_DEV_CLOSE
 	default:
-		return nil, fmt.Errorf("unknown device cmd: %v", cmd)
+		return nil, fmt.Errorf("unknown cmd: %v", cmd)
 	}
 
 	data, err := cmd.Marshal()
@@ -31,7 +33,7 @@ func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*DeviceCmd, error)
 		return nil, fmt.Errorf("failed to marshal cmd: %w", err)
 	}
 
-	return &DeviceCmd{
+	return &Cmd{
 		Kind:     kind,
 		DeviceId: deviceID,
 		Seq:      seq,
@@ -39,19 +41,23 @@ func NewDeviceCmd(deviceID, seq uint64, cmd proto.Marshaler) (*DeviceCmd, error)
 	}, nil
 }
 
-func NewDeviceMsg(deviceID, ack uint64, msg proto.Marshaler) (*DeviceMsg, error) {
-	var kind DeviceMsgType
+func NewDeviceMsg(deviceID, ack uint64, msg proto.Marshaler) (*Msg, error) {
+	var kind MsgType
 	switch msg.(type) {
-	case *DeviceRegisterMsg:
-		kind = MSG_DEV_REGISTER
+	case *RegisterMsg:
+		kind = MSG_REGISTER
 	case *DeviceOperationResultMsg:
 		kind = MSG_DEV_OPERATION_RESULT
 	case *DeviceMetricsMsg:
 		kind = MSG_DEV_METRICS
-	case *DeviceDoneMsg:
-		kind = MSG_DEV_DONE
+	case *DoneMsg:
+		kind = MSG_DONE
+	case *ErrorMsg:
+		kind = MSG_ERROR
+	case *DeviceEventMsg:
+		kind = MSG_DEV_EVENTS
 	default:
-		return nil, fmt.Errorf("unknown device msg: %v", msg)
+		return nil, fmt.Errorf("unknown msg: %v", msg)
 	}
 
 	data, err := msg.Marshal()
@@ -59,7 +65,7 @@ func NewDeviceMsg(deviceID, ack uint64, msg proto.Marshaler) (*DeviceMsg, error)
 		return nil, fmt.Errorf("failed to marshal msg: %w", err)
 	}
 
-	return &DeviceMsg{
+	return &Msg{
 		Kind:     kind,
 		DeviceId: deviceID,
 		Ack:      ack,

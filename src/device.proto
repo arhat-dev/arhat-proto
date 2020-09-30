@@ -61,10 +61,6 @@ message DeviceCloseCmd {
 
 */
 
-message DeviceRegisterMsg {
-    string name = 1;
-}
-
 message DeviceOperationResultMsg {
     repeated bytes result = 1;
 }
