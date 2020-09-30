@@ -21,10 +21,6 @@ package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
 
-service Extension {
-    rpc SyncDevice (stream Msg) returns (stream Cmd);
-}
-
 enum CmdType {
     _INVALID_CMD = 0;
 
