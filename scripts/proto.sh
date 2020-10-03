@@ -53,7 +53,7 @@ _do_gen_proto_python() {
 
   # shellcheck disable=SC2086
   pipenv run \
-  protoc \
+  python -m grpc_tools.protoc \
     -I"${GOPATH}/src" \
     -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
     -I"./src" \
