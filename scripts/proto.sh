@@ -35,6 +35,7 @@ fix_pb_gen_json_name() {
 
 _do_gen_proto_go() {
   rm arhatgopb/*.pb.go || true
+
   # shellcheck disable=SC2086
   protoc \
     -I"${GOPATH}/src" \
@@ -47,8 +48,22 @@ _do_gen_proto_go() {
   # fix_pb_gen_json_name ./arhatgopb/*.pb.go
 }
 
+_do_gen_proto_python() {
+  rm arhatpythonpb/*_pb*.py || true
+
+  # shellcheck disable=SC2086
+  pipenv run \
+  protoc \
+    -I"${GOPATH}/src" \
+    -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
+    -I"./src" \
+    --python_out "./arhatpythonpb" \
+    ${PROTO_SOURCE}
+}
+
 _do_gen_proto_c() {
   rm arhatnanopb/*.pb.c arhatnanopb/*.pb.h || true
+
   # shellcheck disable=SC2086
   pipenv run \
   python build/nanopb/generator/nanopb_generator.py \
@@ -58,6 +73,20 @@ _do_gen_proto_c() {
     -I"${GOPATH}/src" \
     -I"${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
     -I"./src" \
+    ${PROTO_SOURCE}
+}
+
+_do_gen_proto_rust() {
+  rm arhatrustpb/*.pb.rs || true
+
+  # shellcheck disable=SC2086
+  pipenv run \
+  protoc \
+    -I ./src \
+    -I "${GOPATH}/src/github.com/gogo/protobuf/protobuf" \
+    -I "${GOPATH}/src" \
+    --plugin "protoc-gen-rust=$(pwd)/build/pb-jelly/pb-jelly-gen/codegen/codegen.py" \
+    --rust_out ./arhatrustpb \
     ${PROTO_SOURCE}
 }
 

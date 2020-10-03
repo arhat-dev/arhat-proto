@@ -15,12 +15,21 @@
 test.go:
 	GOOS=$(shell go env GOHOSTOS) GOARCH=$(shell go env GOHOSTARCH) CGO_ENABLED=1 \
 	go test -mod=readonly -v -failfast -covermode=atomic -race -cpu 1,2,4 \
-	-coverprofile=coverage.pkg.txt -coverpkg=./arhatgopb/... ./arhatgopb/...
+	-coverprofile=coverage.pkg.txt -coverpkg=./templategopb/... ./templategopb/...
+
+test.python:
+	# TODO: add tests for python protobuf files
+	:
 
 test.c:
 	# TODO: add tests for c protobuf files
 	:
 
+test.rust:
+	# TODO: add tests for rust protobuf files
+	:
+
 test.all: \
 	test.go \
+	test.python \
 	test.c
