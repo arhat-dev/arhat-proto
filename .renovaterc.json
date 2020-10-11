@@ -1,7 +1,4 @@
 {
   "extends": ["config:base", "github>arhat-dev/renovate-presets:general"],
-  "schedule": ["every weekend"],
-  "timezone": "Asia/Hong_Kong",
-  "dependencyDashboardTitle": "Available dependency upgrades",
   "dependencyDashboardHeader": "This issue tracks dependency version upgrades"
 }
