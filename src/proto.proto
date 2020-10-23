@@ -16,7 +16,7 @@ limitations under the License.
 
 syntax = "proto3";
 
-// +build !nodev
+// +build !noperipheral
 package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
@@ -24,10 +24,10 @@ option go_package = "arhat.dev/arhat-proto/arhatgopb";
 enum CmdType {
     _INVALID_CMD = 0;
 
-    CMD_DEV_CONNECT = 11;
-    CMD_DEV_OPERATE = 12;
-    CMD_DEV_COLLECT_METRICS = 13;
-    CMD_DEV_CLOSE = 14;
+    CMD_PERIPHERAL_CONNECT = 11;
+    CMD_PERIPHERAL_OPERATE = 12;
+    CMD_PERIPHERAL_COLLECT_METRICS = 13;
+    CMD_PERIPHERAL_CLOSE = 14;
 }
 
 message Cmd {
@@ -47,9 +47,9 @@ enum MsgType {
     MSG_DONE = 2;
     MSG_REGISTER = 3;
 
-    MSG_DEV_OPERATION_RESULT = 11;
-    MSG_DEV_METRICS = 12;
-    MSG_DEV_EVENTS = 13;
+    MSG_PERIPHERAL_OPERATION_RESULT = 11;
+    MSG_PERIPHERAL_METRICS = 12;
+    MSG_PERIPHERAL_EVENTS = 13;
 }
 
 message Msg {

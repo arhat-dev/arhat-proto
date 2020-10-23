@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\037arhat.dev/arhat-proto/arhatgopb',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bproto.proto\x12\x05\x61rhat\"M\n\x03\x43md\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.CmdType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03seq\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"M\n\x03Msg\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.MsgType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03\x61\x63k\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"\t\n\x07\x44oneMsg\"\x1f\n\x08\x45rrorMsg\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"\x1b\n\x0bRegisterMsg\x12\x0c\n\x04name\x18\x01 \x01(\t*u\n\x07\x43mdType\x12\x10\n\x0c_INVALID_CMD\x10\x00\x12\x13\n\x0f\x43MD_DEV_CONNECT\x10\x0b\x12\x13\n\x0f\x43MD_DEV_OPERATE\x10\x0c\x12\x1b\n\x17\x43MD_DEV_COLLECT_METRICS\x10\r\x12\x11\n\rCMD_DEV_CLOSE\x10\x0e*\x91\x01\n\x07MsgType\x12\x10\n\x0c_INVALID_MSG\x10\x00\x12\r\n\tMSG_ERROR\x10\x01\x12\x0c\n\x08MSG_DONE\x10\x02\x12\x10\n\x0cMSG_REGISTER\x10\x03\x12\x1c\n\x18MSG_DEV_OPERATION_RESULT\x10\x0b\x12\x13\n\x0fMSG_DEV_METRICS\x10\x0c\x12\x12\n\x0eMSG_DEV_EVENTS\x10\rB!Z\x1f\x61rhat.dev/arhat-proto/arhatgopbb\x06proto3'
+  serialized_pb=b'\n\x0bproto.proto\x12\x05\x61rhat\"M\n\x03\x43md\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.CmdType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03seq\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"M\n\x03Msg\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.MsgType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03\x61\x63k\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"\t\n\x07\x44oneMsg\"\x1f\n\x08\x45rrorMsg\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"\x1b\n\x0bRegisterMsg\x12\x0c\n\x04name\x18\x01 \x01(\t*\x91\x01\n\x07\x43mdType\x12\x10\n\x0c_INVALID_CMD\x10\x00\x12\x1a\n\x16\x43MD_PERIPHERAL_CONNECT\x10\x0b\x12\x1a\n\x16\x43MD_PERIPHERAL_OPERATE\x10\x0c\x12\"\n\x1e\x43MD_PERIPHERAL_COLLECT_METRICS\x10\r\x12\x18\n\x14\x43MD_PERIPHERAL_CLOSE\x10\x0e*\xa6\x01\n\x07MsgType\x12\x10\n\x0c_INVALID_MSG\x10\x00\x12\r\n\tMSG_ERROR\x10\x01\x12\x0c\n\x08MSG_DONE\x10\x02\x12\x10\n\x0cMSG_REGISTER\x10\x03\x12#\n\x1fMSG_PERIPHERAL_OPERATION_RESULT\x10\x0b\x12\x1a\n\x16MSG_PERIPHERAL_METRICS\x10\x0c\x12\x19\n\x15MSG_PERIPHERAL_EVENTS\x10\rB!Z\x1f\x61rhat.dev/arhat-proto/arhatgopbb\x06proto3'
 )
 
 _CMDTYPE = _descriptor.EnumDescriptor(
@@ -36,30 +36,30 @@ _CMDTYPE = _descriptor.EnumDescriptor(
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='CMD_DEV_CONNECT', index=1, number=11,
+      name='CMD_PERIPHERAL_CONNECT', index=1, number=11,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='CMD_DEV_OPERATE', index=2, number=12,
+      name='CMD_PERIPHERAL_OPERATE', index=2, number=12,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='CMD_DEV_COLLECT_METRICS', index=3, number=13,
+      name='CMD_PERIPHERAL_COLLECT_METRICS', index=3, number=13,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='CMD_DEV_CLOSE', index=4, number=14,
+      name='CMD_PERIPHERAL_CLOSE', index=4, number=14,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=253,
-  serialized_end=370,
+  serialized_start=254,
+  serialized_end=399,
 )
 _sym_db.RegisterEnumDescriptor(_CMDTYPE)
 
@@ -92,41 +92,41 @@ _MSGTYPE = _descriptor.EnumDescriptor(
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='MSG_DEV_OPERATION_RESULT', index=4, number=11,
+      name='MSG_PERIPHERAL_OPERATION_RESULT', index=4, number=11,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='MSG_DEV_METRICS', index=5, number=12,
+      name='MSG_PERIPHERAL_METRICS', index=5, number=12,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='MSG_DEV_EVENTS', index=6, number=13,
+      name='MSG_PERIPHERAL_EVENTS', index=6, number=13,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=373,
-  serialized_end=518,
+  serialized_start=402,
+  serialized_end=568,
 )
 _sym_db.RegisterEnumDescriptor(_MSGTYPE)
 
 MsgType = enum_type_wrapper.EnumTypeWrapper(_MSGTYPE)
 _INVALID_CMD = 0
-CMD_DEV_CONNECT = 11
-CMD_DEV_OPERATE = 12
-CMD_DEV_COLLECT_METRICS = 13
-CMD_DEV_CLOSE = 14
+CMD_PERIPHERAL_CONNECT = 11
+CMD_PERIPHERAL_OPERATE = 12
+CMD_PERIPHERAL_COLLECT_METRICS = 13
+CMD_PERIPHERAL_CLOSE = 14
 _INVALID_MSG = 0
 MSG_ERROR = 1
 MSG_DONE = 2
 MSG_REGISTER = 3
-MSG_DEV_OPERATION_RESULT = 11
-MSG_DEV_METRICS = 12
-MSG_DEV_EVENTS = 13
+MSG_PERIPHERAL_OPERATION_RESULT = 11
+MSG_PERIPHERAL_METRICS = 12
+MSG_PERIPHERAL_EVENTS = 13
 
 
 

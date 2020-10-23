@@ -16,10 +16,10 @@ extern "C" {
 /* Enum definitions */
 typedef enum _arhat_CmdType {
     arhat_CmdType__INVALID_CMD = 0,
-    arhat_CmdType_CMD_DEV_CONNECT = 11,
-    arhat_CmdType_CMD_DEV_OPERATE = 12,
-    arhat_CmdType_CMD_DEV_COLLECT_METRICS = 13,
-    arhat_CmdType_CMD_DEV_CLOSE = 14
+    arhat_CmdType_CMD_PERIPHERAL_CONNECT = 11,
+    arhat_CmdType_CMD_PERIPHERAL_OPERATE = 12,
+    arhat_CmdType_CMD_PERIPHERAL_COLLECT_METRICS = 13,
+    arhat_CmdType_CMD_PERIPHERAL_CLOSE = 14
 } arhat_CmdType;
 
 typedef enum _arhat_MsgType {
@@ -27,9 +27,9 @@ typedef enum _arhat_MsgType {
     arhat_MsgType_MSG_ERROR = 1,
     arhat_MsgType_MSG_DONE = 2,
     arhat_MsgType_MSG_REGISTER = 3,
-    arhat_MsgType_MSG_DEV_OPERATION_RESULT = 11,
-    arhat_MsgType_MSG_DEV_METRICS = 12,
-    arhat_MsgType_MSG_DEV_EVENTS = 13
+    arhat_MsgType_MSG_PERIPHERAL_OPERATION_RESULT = 11,
+    arhat_MsgType_MSG_PERIPHERAL_METRICS = 12,
+    arhat_MsgType_MSG_PERIPHERAL_EVENTS = 13
 } arhat_MsgType;
 
 /* Struct definitions */
@@ -62,12 +62,12 @@ typedef struct _arhat_Msg {
 
 /* Helper constants for enums */
 #define _arhat_CmdType_MIN arhat_CmdType__INVALID_CMD
-#define _arhat_CmdType_MAX arhat_CmdType_CMD_DEV_CLOSE
-#define _arhat_CmdType_ARRAYSIZE ((arhat_CmdType)(arhat_CmdType_CMD_DEV_CLOSE+1))
+#define _arhat_CmdType_MAX arhat_CmdType_CMD_PERIPHERAL_CLOSE
+#define _arhat_CmdType_ARRAYSIZE ((arhat_CmdType)(arhat_CmdType_CMD_PERIPHERAL_CLOSE+1))
 
 #define _arhat_MsgType_MIN arhat_MsgType__INVALID_MSG
-#define _arhat_MsgType_MAX arhat_MsgType_MSG_DEV_EVENTS
-#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_DEV_EVENTS+1))
+#define _arhat_MsgType_MAX arhat_MsgType_MSG_PERIPHERAL_EVENTS
+#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_PERIPHERAL_EVENTS+1))
 
 
 /* Initializer values for message structs */

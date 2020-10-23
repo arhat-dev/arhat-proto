@@ -16,7 +16,7 @@ limitations under the License.
 
 syntax = "proto3";
 
-// +build !nodev
+// +build !noperipheral
 package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
@@ -36,23 +36,23 @@ message TLSConfig {
     repeated string next_protos = 9;
 }
 
-message DeviceConnectCmd {
+message PeripheralConnectCmd {
     string target = 1;
     map<string, string> params = 2;
     TLSConfig tls = 3;
 }
 
-message DeviceOperateCmd {
+message PeripheralOperateCmd {
     map<string, string> params = 1;
     // (optional) operation data
     bytes data = 2;
 }
 
-message DeviceMetricsCollectCmd {
+message PeripheralMetricsCollectCmd {
     map<string, string> params = 1;
 }
 
-message DeviceCloseCmd {
+message PeripheralCloseCmd {
 }
 
 /*
@@ -61,11 +61,11 @@ message DeviceCloseCmd {
 
 */
 
-message DeviceOperationResultMsg {
+message PeripheralOperationResultMsg {
     repeated bytes result = 1;
 }
 
-message DeviceMetricsMsg {
+message PeripheralMetricsMsg {
     message Value {
         double value = 1;
 
@@ -76,10 +76,10 @@ message DeviceMetricsMsg {
     repeated Value values = 1;
 }
 
-enum DeviceEventType {
-    _INVALID_DEV_EVENT = 0;
+enum PeripheralEventType {
+    _INVALID_PERIPHERAL_EVENT = 0;
 }
 
-message DeviceEventMsg {
-    DeviceEventType kind = 1;
+message PeripheralEventMsg {
+    PeripheralEventType kind = 1;
 }
