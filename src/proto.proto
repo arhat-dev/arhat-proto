@@ -70,6 +70,16 @@ message ErrorMsg {
     string description = 1;
 }
 
+enum CodecType {
+    _INVALID_CODEC = 0;
+
+    CODEC_PROTOBUF = 1;
+    CODEC_JSON = 2;
+}
+
+// RegisterMsg is always sent in json codec, so the extension server
+// can decoded it and determine real codec used in the stream
 message RegisterMsg {
     string name = 1;
+    CodecType codec = 2;
 }
