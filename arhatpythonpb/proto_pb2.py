@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\037arhat.dev/arhat-proto/arhatgopb',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bproto.proto\x12\x05\x61rhat\"M\n\x03\x43md\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.CmdType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03seq\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"M\n\x03Msg\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.MsgType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03\x61\x63k\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"\t\n\x07\x44oneMsg\"\x1f\n\x08\x45rrorMsg\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"<\n\x0bRegisterMsg\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1f\n\x05\x63odec\x18\x02 \x01(\x0e\x32\x10.arhat.CodecType*\x91\x01\n\x07\x43mdType\x12\x10\n\x0c_INVALID_CMD\x10\x00\x12\x1a\n\x16\x43MD_PERIPHERAL_CONNECT\x10\x0b\x12\x1a\n\x16\x43MD_PERIPHERAL_OPERATE\x10\x0c\x12\"\n\x1e\x43MD_PERIPHERAL_COLLECT_METRICS\x10\r\x12\x18\n\x14\x43MD_PERIPHERAL_CLOSE\x10\x0e*\xa6\x01\n\x07MsgType\x12\x10\n\x0c_INVALID_MSG\x10\x00\x12\r\n\tMSG_ERROR\x10\x01\x12\x0c\n\x08MSG_DONE\x10\x02\x12\x10\n\x0cMSG_REGISTER\x10\x03\x12#\n\x1fMSG_PERIPHERAL_OPERATION_RESULT\x10\x0b\x12\x1a\n\x16MSG_PERIPHERAL_METRICS\x10\x0c\x12\x19\n\x15MSG_PERIPHERAL_EVENTS\x10\r*C\n\tCodecType\x12\x12\n\x0e_INVALID_CODEC\x10\x00\x12\x12\n\x0e\x43ODEC_PROTOBUF\x10\x01\x12\x0e\n\nCODEC_JSON\x10\x02\x42!Z\x1f\x61rhat.dev/arhat-proto/arhatgopbb\x06proto3'
+  serialized_pb=b'\n\x0bproto.proto\x12\x05\x61rhat\"M\n\x03\x43md\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.CmdType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03seq\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"M\n\x03Msg\x12\x1c\n\x04kind\x18\x01 \x01(\x0e\x32\x0e.arhat.MsgType\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0b\n\x03\x61\x63k\x18\x03 \x01(\x04\x12\x0f\n\x07payload\x18\x04 \x01(\x0c\"\t\n\x07\x44oneMsg\"\x1f\n\x08\x45rrorMsg\x12\x13\n\x0b\x64\x65scription\x18\x01 \x01(\t\"j\n\x0bRegisterMsg\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1f\n\x05\x63odec\x18\x02 \x01(\x0e\x32\x10.arhat.CodecType\x12,\n\x0e\x65xtension_type\x18\x03 \x01(\x0e\x32\x14.arhat.ExtensionType*\x91\x01\n\x07\x43mdType\x12\x10\n\x0c_INVALID_CMD\x10\x00\x12\x1a\n\x16\x43MD_PERIPHERAL_CONNECT\x10\x0b\x12\x1a\n\x16\x43MD_PERIPHERAL_OPERATE\x10\x0c\x12\"\n\x1e\x43MD_PERIPHERAL_COLLECT_METRICS\x10\r\x12\x18\n\x14\x43MD_PERIPHERAL_CLOSE\x10\x0e*\xa6\x01\n\x07MsgType\x12\x10\n\x0c_INVALID_MSG\x10\x00\x12\r\n\tMSG_ERROR\x10\x01\x12\x0c\n\x08MSG_DONE\x10\x02\x12\x10\n\x0cMSG_REGISTER\x10\x03\x12#\n\x1fMSG_PERIPHERAL_OPERATION_RESULT\x10\x0b\x12\x1a\n\x16MSG_PERIPHERAL_METRICS\x10\x0c\x12\x19\n\x15MSG_PERIPHERAL_EVENTS\x10\r*C\n\tCodecType\x12\x12\n\x0e_INVALID_CODEC\x10\x00\x12\x12\n\x0e\x43ODEC_PROTOBUF\x10\x01\x12\x0e\n\nCODEC_JSON\x10\x02*A\n\rExtensionType\x12\x16\n\x12_INVALID_EXTENSION\x10\x00\x12\x18\n\x14\x45XTENSION_PERIPHERAL\x10\x01\x42!Z\x1f\x61rhat.dev/arhat-proto/arhatgopbb\x06proto3'
 )
 
 _CMDTYPE = _descriptor.EnumDescriptor(
@@ -58,8 +58,8 @@ _CMDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=287,
-  serialized_end=432,
+  serialized_start=333,
+  serialized_end=478,
 )
 _sym_db.RegisterEnumDescriptor(_CMDTYPE)
 
@@ -109,8 +109,8 @@ _MSGTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=435,
-  serialized_end=601,
+  serialized_start=481,
+  serialized_end=647,
 )
 _sym_db.RegisterEnumDescriptor(_MSGTYPE)
 
@@ -140,12 +140,38 @@ _CODECTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=603,
-  serialized_end=670,
+  serialized_start=649,
+  serialized_end=716,
 )
 _sym_db.RegisterEnumDescriptor(_CODECTYPE)
 
 CodecType = enum_type_wrapper.EnumTypeWrapper(_CODECTYPE)
+_EXTENSIONTYPE = _descriptor.EnumDescriptor(
+  name='ExtensionType',
+  full_name='arhat.ExtensionType',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='_INVALID_EXTENSION', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='EXTENSION_PERIPHERAL', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=718,
+  serialized_end=783,
+)
+_sym_db.RegisterEnumDescriptor(_EXTENSIONTYPE)
+
+ExtensionType = enum_type_wrapper.EnumTypeWrapper(_EXTENSIONTYPE)
 _INVALID_CMD = 0
 CMD_PERIPHERAL_CONNECT = 11
 CMD_PERIPHERAL_OPERATE = 12
@@ -161,6 +187,8 @@ MSG_PERIPHERAL_EVENTS = 13
 _INVALID_CODEC = 0
 CODEC_PROTOBUF = 1
 CODEC_JSON = 2
+_INVALID_EXTENSION = 0
+EXTENSION_PERIPHERAL = 1
 
 
 
@@ -349,6 +377,13 @@ _REGISTERMSG = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='extension_type', full_name='arhat.RegisterMsg.extension_type', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -362,12 +397,13 @@ _REGISTERMSG = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=224,
-  serialized_end=284,
+  serialized_end=330,
 )
 
 _CMD.fields_by_name['kind'].enum_type = _CMDTYPE
 _MSG.fields_by_name['kind'].enum_type = _MSGTYPE
 _REGISTERMSG.fields_by_name['codec'].enum_type = _CODECTYPE
+_REGISTERMSG.fields_by_name['extension_type'].enum_type = _EXTENSIONTYPE
 DESCRIPTOR.message_types_by_name['Cmd'] = _CMD
 DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['DoneMsg'] = _DONEMSG
@@ -376,6 +412,7 @@ DESCRIPTOR.message_types_by_name['RegisterMsg'] = _REGISTERMSG
 DESCRIPTOR.enum_types_by_name['CmdType'] = _CMDTYPE
 DESCRIPTOR.enum_types_by_name['MsgType'] = _MSGTYPE
 DESCRIPTOR.enum_types_by_name['CodecType'] = _CODECTYPE
+DESCRIPTOR.enum_types_by_name['ExtensionType'] = _EXTENSIONTYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Cmd = _reflection.GeneratedProtocolMessageType('Cmd', (_message.Message,), {

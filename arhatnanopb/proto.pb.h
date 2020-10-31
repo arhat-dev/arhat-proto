@@ -38,6 +38,11 @@ typedef enum _arhat_CodecType {
     arhat_CodecType_CODEC_JSON = 2
 } arhat_CodecType;
 
+typedef enum _arhat_ExtensionType {
+    arhat_ExtensionType__INVALID_EXTENSION = 0,
+    arhat_ExtensionType_EXTENSION_PERIPHERAL = 1
+} arhat_ExtensionType;
+
 /* Struct definitions */
 typedef struct _arhat_DoneMsg {
     char dummy_field;
@@ -64,6 +69,7 @@ typedef struct _arhat_Msg {
 typedef struct _arhat_RegisterMsg {
     pb_callback_t name;
     arhat_CodecType codec;
+    arhat_ExtensionType extension_type;
 } arhat_RegisterMsg;
 
 
@@ -80,18 +86,22 @@ typedef struct _arhat_RegisterMsg {
 #define _arhat_CodecType_MAX arhat_CodecType_CODEC_JSON
 #define _arhat_CodecType_ARRAYSIZE ((arhat_CodecType)(arhat_CodecType_CODEC_JSON+1))
 
+#define _arhat_ExtensionType_MIN arhat_ExtensionType__INVALID_EXTENSION
+#define _arhat_ExtensionType_MAX arhat_ExtensionType_EXTENSION_PERIPHERAL
+#define _arhat_ExtensionType_ARRAYSIZE ((arhat_ExtensionType)(arhat_ExtensionType_EXTENSION_PERIPHERAL+1))
+
 
 /* Initializer values for message structs */
 #define arhat_Cmd_init_default                   {_arhat_CmdType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_Msg_init_default                   {_arhat_MsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DoneMsg_init_default               {0}
 #define arhat_ErrorMsg_init_default              {{{NULL}, NULL}}
-#define arhat_RegisterMsg_init_default           {{{NULL}, NULL}, _arhat_CodecType_MIN}
+#define arhat_RegisterMsg_init_default           {{{NULL}, NULL}, _arhat_CodecType_MIN, _arhat_ExtensionType_MIN}
 #define arhat_Cmd_init_zero                      {_arhat_CmdType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_Msg_init_zero                      {_arhat_MsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DoneMsg_init_zero                  {0}
 #define arhat_ErrorMsg_init_zero                 {{{NULL}, NULL}}
-#define arhat_RegisterMsg_init_zero              {{{NULL}, NULL}, _arhat_CodecType_MIN}
+#define arhat_RegisterMsg_init_zero              {{{NULL}, NULL}, _arhat_CodecType_MIN, _arhat_ExtensionType_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define arhat_ErrorMsg_description_tag           1
@@ -105,6 +115,7 @@ typedef struct _arhat_RegisterMsg {
 #define arhat_Msg_payload_tag                    4
 #define arhat_RegisterMsg_name_tag               1
 #define arhat_RegisterMsg_codec_tag              2
+#define arhat_RegisterMsg_extension_type_tag     3
 
 /* Struct field encoding specification for nanopb */
 #define arhat_Cmd_FIELDLIST(X, a) \
@@ -135,7 +146,8 @@ X(a, CALLBACK, SINGULAR, STRING,   description,       1)
 
 #define arhat_RegisterMsg_FIELDLIST(X, a) \
 X(a, CALLBACK, SINGULAR, STRING,   name,              1) \
-X(a, STATIC,   SINGULAR, UENUM,    codec,             2)
+X(a, STATIC,   SINGULAR, UENUM,    codec,             2) \
+X(a, STATIC,   SINGULAR, UENUM,    extension_type,    3)
 #define arhat_RegisterMsg_CALLBACK pb_default_field_callback
 #define arhat_RegisterMsg_DEFAULT NULL
 

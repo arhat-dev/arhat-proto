@@ -77,9 +77,16 @@ enum CodecType {
     CODEC_JSON = 2;
 }
 
+enum ExtensionType {
+    _INVALID_EXTENSION = 0;
+
+    EXTENSION_PERIPHERAL = 1;
+}
+
 // RegisterMsg is always sent in json codec, so the extension server
 // can decoded it and determine real codec used in the stream
 message RegisterMsg {
     string name = 1;
     CodecType codec = 2;
+    ExtensionType extension_type = 3;
 }
