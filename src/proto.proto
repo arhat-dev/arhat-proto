@@ -23,6 +23,8 @@ option go_package = "arhat.dev/arhat-proto/arhatgopb";
 enum CmdType {
     _INVALID_CMD = 0;
 
+    CMD_PING = 1;
+
     CMD_PERIPHERAL_CONNECT = 11;
     CMD_PERIPHERAL_OPERATE = 12;
     CMD_PERIPHERAL_COLLECT_METRICS = 13;
@@ -42,9 +44,11 @@ message Cmd {
 enum MsgType {
     _INVALID_MSG = 0;
 
-    MSG_ERROR = 1;
-    MSG_DONE = 2;
-    MSG_REGISTER = 3;
+    MSG_PONG = 1;
+    MSG_ERROR = 2;
+    MSG_DONE = 3;
+
+    MSG_REGISTER = 10;
 
     MSG_PERIPHERAL_OPERATION_RESULT = 11;
     MSG_PERIPHERAL_METRICS = 12;

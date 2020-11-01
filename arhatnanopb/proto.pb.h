@@ -16,6 +16,7 @@ extern "C" {
 /* Enum definitions */
 typedef enum _arhat_CmdType {
     arhat_CmdType__INVALID_CMD = 0,
+    arhat_CmdType_CMD_PING = 1,
     arhat_CmdType_CMD_PERIPHERAL_CONNECT = 11,
     arhat_CmdType_CMD_PERIPHERAL_OPERATE = 12,
     arhat_CmdType_CMD_PERIPHERAL_COLLECT_METRICS = 13,
@@ -24,9 +25,10 @@ typedef enum _arhat_CmdType {
 
 typedef enum _arhat_MsgType {
     arhat_MsgType__INVALID_MSG = 0,
-    arhat_MsgType_MSG_ERROR = 1,
-    arhat_MsgType_MSG_DONE = 2,
-    arhat_MsgType_MSG_REGISTER = 3,
+    arhat_MsgType_MSG_PONG = 1,
+    arhat_MsgType_MSG_ERROR = 2,
+    arhat_MsgType_MSG_DONE = 3,
+    arhat_MsgType_MSG_REGISTER = 10,
     arhat_MsgType_MSG_PERIPHERAL_OPERATION_RESULT = 11,
     arhat_MsgType_MSG_PERIPHERAL_METRICS = 12,
     arhat_MsgType_MSG_PERIPHERAL_EVENTS = 13
