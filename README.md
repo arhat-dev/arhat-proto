@@ -12,6 +12,15 @@ Extension protocol for [`arhat`](https://github.com/arhat-dev/arhat)
 1. Install proto tools with `make install.proto.all`
 1. Update `*.proto` in `src` directory
 1. Generate protobuf files with `make gen.proto.all`
+1. Test with `make test.all`
+
+## Usage
+
+- Go
+
+  ```bash
+  go get -u arhat.dev/arhat-proto/arhatgopb
+  ```
 
 ## License
 
