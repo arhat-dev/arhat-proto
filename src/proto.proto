@@ -43,7 +43,11 @@ message Cmd {
     uint64 id = 2;
 
     uint64 seq = 3;
-    bytes payload = 4;
+
+    // session id for data streaming
+    uint64 sid = 4;
+
+    bytes payload = 10;
 }
 
 enum MsgType {
@@ -73,7 +77,11 @@ message Msg {
 
     // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
     uint64 ack = 3;
-    bytes payload = 4;
+
+    // session id for data streaming
+    uint64 sid = 4;
+
+    bytes payload = 10;
 }
 
 message DoneMsg {
