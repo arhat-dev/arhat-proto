@@ -36,6 +36,12 @@ message TLSConfig {
     repeated string next_protos = 9;
 }
 
+/*
+
+Commands
+
+*/
+
 message PeripheralConnectCmd {
     string target = 1;
     map<string, string> params = 2;
@@ -57,7 +63,7 @@ message PeripheralCloseCmd {
 
 /*
 
-
+Messages
 
 */
 

@@ -29,6 +29,11 @@ enum CmdType {
     CMD_PERIPHERAL_OPERATE = 12;
     CMD_PERIPHERAL_COLLECT_METRICS = 13;
     CMD_PERIPHERAL_CLOSE = 14;
+
+    // aranya-proto runtime commands (pod management)
+    // payload is always encoded in protobuf bytes
+    // see https://github.com/arhat-dev/aranya-proto/blob/master/src/cmd_pod.proto
+    CMD_RUNTIME_ARANYA_PROTO = 20;
 }
 
 message Cmd {
@@ -53,6 +58,11 @@ enum MsgType {
     MSG_PERIPHERAL_OPERATION_RESULT = 11;
     MSG_PERIPHERAL_METRICS = 12;
     MSG_PERIPHERAL_EVENTS = 13;
+
+    // message response for aranya-proto runtime command
+    // payload MUST be encoded in protobuf bytes
+    // see https://github.com/arhat-dev/aranya-proto/blob/master/src/cmd_pod.proto
+    MSG_RUNTIME_ARANYA_PROTO = 20;
 }
 
 message Msg {
@@ -83,7 +93,11 @@ enum CodecType {
 enum ExtensionType {
     _INVALID_EXTENSION = 0;
 
+    // Peripheral management extension
     EXTENSION_PERIPHERAL = 1;
+
+    // Runtime implementation for kubernetes pods
+    EXTENSION_RUNTIME = 2;
 }
 
 // RegisterMsg is always sent in json codec, so the extension server

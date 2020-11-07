@@ -20,7 +20,8 @@ typedef enum _arhat_CmdType {
     arhat_CmdType_CMD_PERIPHERAL_CONNECT = 11,
     arhat_CmdType_CMD_PERIPHERAL_OPERATE = 12,
     arhat_CmdType_CMD_PERIPHERAL_COLLECT_METRICS = 13,
-    arhat_CmdType_CMD_PERIPHERAL_CLOSE = 14
+    arhat_CmdType_CMD_PERIPHERAL_CLOSE = 14,
+    arhat_CmdType_CMD_RUNTIME_ARANYA_PROTO = 20
 } arhat_CmdType;
 
 typedef enum _arhat_MsgType {
@@ -31,7 +32,8 @@ typedef enum _arhat_MsgType {
     arhat_MsgType_MSG_REGISTER = 10,
     arhat_MsgType_MSG_PERIPHERAL_OPERATION_RESULT = 11,
     arhat_MsgType_MSG_PERIPHERAL_METRICS = 12,
-    arhat_MsgType_MSG_PERIPHERAL_EVENTS = 13
+    arhat_MsgType_MSG_PERIPHERAL_EVENTS = 13,
+    arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO = 20
 } arhat_MsgType;
 
 typedef enum _arhat_CodecType {
@@ -42,7 +44,8 @@ typedef enum _arhat_CodecType {
 
 typedef enum _arhat_ExtensionType {
     arhat_ExtensionType__INVALID_EXTENSION = 0,
-    arhat_ExtensionType_EXTENSION_PERIPHERAL = 1
+    arhat_ExtensionType_EXTENSION_PERIPHERAL = 1,
+    arhat_ExtensionType_EXTENSION_RUNTIME = 2
 } arhat_ExtensionType;
 
 /* Struct definitions */
@@ -77,20 +80,20 @@ typedef struct _arhat_RegisterMsg {
 
 /* Helper constants for enums */
 #define _arhat_CmdType_MIN arhat_CmdType__INVALID_CMD
-#define _arhat_CmdType_MAX arhat_CmdType_CMD_PERIPHERAL_CLOSE
-#define _arhat_CmdType_ARRAYSIZE ((arhat_CmdType)(arhat_CmdType_CMD_PERIPHERAL_CLOSE+1))
+#define _arhat_CmdType_MAX arhat_CmdType_CMD_RUNTIME_ARANYA_PROTO
+#define _arhat_CmdType_ARRAYSIZE ((arhat_CmdType)(arhat_CmdType_CMD_RUNTIME_ARANYA_PROTO+1))
 
 #define _arhat_MsgType_MIN arhat_MsgType__INVALID_MSG
-#define _arhat_MsgType_MAX arhat_MsgType_MSG_PERIPHERAL_EVENTS
-#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_PERIPHERAL_EVENTS+1))
+#define _arhat_MsgType_MAX arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO
+#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO+1))
 
 #define _arhat_CodecType_MIN arhat_CodecType__INVALID_CODEC
 #define _arhat_CodecType_MAX arhat_CodecType_CODEC_JSON
 #define _arhat_CodecType_ARRAYSIZE ((arhat_CodecType)(arhat_CodecType_CODEC_JSON+1))
 
 #define _arhat_ExtensionType_MIN arhat_ExtensionType__INVALID_EXTENSION
-#define _arhat_ExtensionType_MAX arhat_ExtensionType_EXTENSION_PERIPHERAL
-#define _arhat_ExtensionType_ARRAYSIZE ((arhat_ExtensionType)(arhat_ExtensionType_EXTENSION_PERIPHERAL+1))
+#define _arhat_ExtensionType_MAX arhat_ExtensionType_EXTENSION_RUNTIME
+#define _arhat_ExtensionType_ARRAYSIZE ((arhat_ExtensionType)(arhat_ExtensionType_EXTENSION_RUNTIME+1))
 
 
 /* Initializer values for message structs */
