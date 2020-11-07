@@ -21,7 +21,8 @@ package arhat;
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
 
 enum CmdType {
-    _INVALID_CMD = 0;
+    CMD_DATA_INPUT = 0;
+    CMD_DATA_CLOSE = 10;
 
     CMD_PING = 1;
 
@@ -39,19 +40,21 @@ enum CmdType {
 message Cmd {
     CmdType kind = 1;
 
-    // id assigned by the arhat extension manager
+    // for peripheral extensions: this is the id assigned by the arhat peripheral manager
+    // for runtime extensions: this is the session id assigned by aranya
     uint64 id = 2;
 
+    // for peripheral extensions: this is used to identify request/reponse pair
+    // for runtime extensions:
+    //      this is used to identify data sequence in this session, also assigned by aranya
+    //      this is designed to support unordered data transmission
     uint64 seq = 3;
-
-    // session id for data streaming
-    uint64 sid = 4;
 
     bytes payload = 10;
 }
 
 enum MsgType {
-    _INVALID_MSG = 0;
+    MSG_DATA_OUTPUT = 0;
 
     MSG_PONG = 1;
     MSG_ERROR = 2;
@@ -67,19 +70,20 @@ enum MsgType {
     // payload MUST be encoded in protobuf bytes
     // see https://github.com/arhat-dev/aranya-proto/blob/master/src/cmd_pod.proto
     MSG_RUNTIME_ARANYA_PROTO = 20;
+    MSG_RUNTIME_DATA_STDERR = 21;
 }
 
 message Msg {
     MsgType kind = 1;
 
-    // id assigned by the arhat extension manager
+    // for peripheral extensions: this is the id assigned by the arhat peripheral manager
+    // for runtime extensions: this is the session id assigned by aranya
     uint64 id = 2;
 
-    // (optional) if this is an answer for a Cmd, set ack to seq in Cmd
+    // optional ack number
+    // for peripheral extensions: if set, to acknowledge Cmd with same seq value
+    // for runtime extensions: the data sequence in the session
     uint64 ack = 3;
-
-    // session id for data streaming
-    uint64 sid = 4;
 
     bytes payload = 10;
 }

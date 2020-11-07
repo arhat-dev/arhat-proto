@@ -15,7 +15,8 @@ extern "C" {
 
 /* Enum definitions */
 typedef enum _arhat_CmdType {
-    arhat_CmdType__INVALID_CMD = 0,
+    arhat_CmdType_CMD_DATA_INPUT = 0,
+    arhat_CmdType_CMD_DATA_CLOSE = 10,
     arhat_CmdType_CMD_PING = 1,
     arhat_CmdType_CMD_PERIPHERAL_CONNECT = 11,
     arhat_CmdType_CMD_PERIPHERAL_OPERATE = 12,
@@ -25,7 +26,7 @@ typedef enum _arhat_CmdType {
 } arhat_CmdType;
 
 typedef enum _arhat_MsgType {
-    arhat_MsgType__INVALID_MSG = 0,
+    arhat_MsgType_MSG_DATA_OUTPUT = 0,
     arhat_MsgType_MSG_PONG = 1,
     arhat_MsgType_MSG_ERROR = 2,
     arhat_MsgType_MSG_DONE = 3,
@@ -33,7 +34,8 @@ typedef enum _arhat_MsgType {
     arhat_MsgType_MSG_PERIPHERAL_OPERATION_RESULT = 11,
     arhat_MsgType_MSG_PERIPHERAL_METRICS = 12,
     arhat_MsgType_MSG_PERIPHERAL_EVENTS = 13,
-    arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO = 20
+    arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO = 20,
+    arhat_MsgType_MSG_RUNTIME_DATA_STDERR = 21
 } arhat_MsgType;
 
 typedef enum _arhat_CodecType {
@@ -61,7 +63,6 @@ typedef struct _arhat_Cmd {
     arhat_CmdType kind;
     uint64_t id;
     uint64_t seq;
-    uint64_t sid;
     pb_callback_t payload;
 } arhat_Cmd;
 
@@ -69,7 +70,6 @@ typedef struct _arhat_Msg {
     arhat_MsgType kind;
     uint64_t id;
     uint64_t ack;
-    uint64_t sid;
     pb_callback_t payload;
 } arhat_Msg;
 
@@ -81,13 +81,13 @@ typedef struct _arhat_RegisterMsg {
 
 
 /* Helper constants for enums */
-#define _arhat_CmdType_MIN arhat_CmdType__INVALID_CMD
+#define _arhat_CmdType_MIN arhat_CmdType_CMD_DATA_INPUT
 #define _arhat_CmdType_MAX arhat_CmdType_CMD_RUNTIME_ARANYA_PROTO
 #define _arhat_CmdType_ARRAYSIZE ((arhat_CmdType)(arhat_CmdType_CMD_RUNTIME_ARANYA_PROTO+1))
 
-#define _arhat_MsgType_MIN arhat_MsgType__INVALID_MSG
-#define _arhat_MsgType_MAX arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO
-#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_RUNTIME_ARANYA_PROTO+1))
+#define _arhat_MsgType_MIN arhat_MsgType_MSG_DATA_OUTPUT
+#define _arhat_MsgType_MAX arhat_MsgType_MSG_RUNTIME_DATA_STDERR
+#define _arhat_MsgType_ARRAYSIZE ((arhat_MsgType)(arhat_MsgType_MSG_RUNTIME_DATA_STDERR+1))
 
 #define _arhat_CodecType_MIN arhat_CodecType__INVALID_CODEC
 #define _arhat_CodecType_MAX arhat_CodecType_CODEC_JSON
@@ -99,13 +99,13 @@ typedef struct _arhat_RegisterMsg {
 
 
 /* Initializer values for message structs */
-#define arhat_Cmd_init_default                   {_arhat_CmdType_MIN, 0, 0, 0, {{NULL}, NULL}}
-#define arhat_Msg_init_default                   {_arhat_MsgType_MIN, 0, 0, 0, {{NULL}, NULL}}
+#define arhat_Cmd_init_default                   {_arhat_CmdType_MIN, 0, 0, {{NULL}, NULL}}
+#define arhat_Msg_init_default                   {_arhat_MsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DoneMsg_init_default               {0}
 #define arhat_ErrorMsg_init_default              {{{NULL}, NULL}}
 #define arhat_RegisterMsg_init_default           {{{NULL}, NULL}, _arhat_CodecType_MIN, _arhat_ExtensionType_MIN}
-#define arhat_Cmd_init_zero                      {_arhat_CmdType_MIN, 0, 0, 0, {{NULL}, NULL}}
-#define arhat_Msg_init_zero                      {_arhat_MsgType_MIN, 0, 0, 0, {{NULL}, NULL}}
+#define arhat_Cmd_init_zero                      {_arhat_CmdType_MIN, 0, 0, {{NULL}, NULL}}
+#define arhat_Msg_init_zero                      {_arhat_MsgType_MIN, 0, 0, {{NULL}, NULL}}
 #define arhat_DoneMsg_init_zero                  {0}
 #define arhat_ErrorMsg_init_zero                 {{{NULL}, NULL}}
 #define arhat_RegisterMsg_init_zero              {{{NULL}, NULL}, _arhat_CodecType_MIN, _arhat_ExtensionType_MIN}
@@ -115,12 +115,10 @@ typedef struct _arhat_RegisterMsg {
 #define arhat_Cmd_kind_tag                       1
 #define arhat_Cmd_id_tag                         2
 #define arhat_Cmd_seq_tag                        3
-#define arhat_Cmd_sid_tag                        4
 #define arhat_Cmd_payload_tag                    10
 #define arhat_Msg_kind_tag                       1
 #define arhat_Msg_id_tag                         2
 #define arhat_Msg_ack_tag                        3
-#define arhat_Msg_sid_tag                        4
 #define arhat_Msg_payload_tag                    10
 #define arhat_RegisterMsg_name_tag               1
 #define arhat_RegisterMsg_codec_tag              2
@@ -131,7 +129,6 @@ typedef struct _arhat_RegisterMsg {
 X(a, STATIC,   SINGULAR, UENUM,    kind,              1) \
 X(a, STATIC,   SINGULAR, UINT64,   id,                2) \
 X(a, STATIC,   SINGULAR, UINT64,   seq,               3) \
-X(a, STATIC,   SINGULAR, UINT64,   sid,               4) \
 X(a, CALLBACK, SINGULAR, BYTES,    payload,          10)
 #define arhat_Cmd_CALLBACK pb_default_field_callback
 #define arhat_Cmd_DEFAULT NULL
@@ -140,7 +137,6 @@ X(a, CALLBACK, SINGULAR, BYTES,    payload,          10)
 X(a, STATIC,   SINGULAR, UENUM,    kind,              1) \
 X(a, STATIC,   SINGULAR, UINT64,   id,                2) \
 X(a, STATIC,   SINGULAR, UINT64,   ack,               3) \
-X(a, STATIC,   SINGULAR, UINT64,   sid,               4) \
 X(a, CALLBACK, SINGULAR, BYTES,    payload,          10)
 #define arhat_Msg_CALLBACK pb_default_field_callback
 #define arhat_Msg_DEFAULT NULL
