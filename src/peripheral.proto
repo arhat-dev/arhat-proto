@@ -16,7 +16,7 @@ limitations under the License.
 
 syntax = "proto3";
 
-// +build !noperipheral
+// +build !noextension_peripheral
 package arhat;
 
 option go_package = "arhat.dev/arhat-proto/arhatgopb";
